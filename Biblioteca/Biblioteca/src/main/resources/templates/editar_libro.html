@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Digital</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body style="background-color: #fff7e2;">
+<h1 class="text-center mt-5">Editar Libro</h1>
+<div class="container">
+<form action="/biblioteca/editar" method="post" class="row g-3 needs-validation">
+    <input type="hidden" name="indice" th:value="${libroIndex}" />
+
+    <div class="col-md-6 m-2">
+        <label for="titulo">Título del Libro</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" th:value="${libro.titulo}">
+    </div>
+
+    <div class="col-md-5 m-2">
+        <label for="autor">Autor del Libro</label>
+        <input type="text" class="form-control" id="autor" name="autor" placeholder="Autor" th:value="${libro.autor}">
+    </div>
+
+    <div class="col-md-3 m-2">
+        <label for="año">Año de Publicación</label>
+        <input type="number" class="form-control" id="año" name="año" placeholder="xxxx" th:value="${libro.año}">
+    </div>
+
+    <div class="col-md-5 m-2">
+        <label for="genero">Género Literario</label>
+        <select class="form-control" id="genero" name="genero">
+            <option th:each="opcion : ${generos}" th:value="${opcion}" th:text="${opcion}"
+                    th:selected="${opcion.equals(libro.genero)}"></option>
+        </select>
+    </div>
+
+    <div class="col-md-3 m-2">
+        <label for="cantidad">Cantidad Disponible</label>
+        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad" th:value="${libro.cantidad}">
+    </div>
+
+    <div class="col-md-2 m-2">
+        <button type="submit" class="btn btn-primary btn-block">Editar</button>
+    </div>
+
+    <div class="col-md-2 m-2">
+        <a href="/biblioteca/libros" class="btn btn-secondary btn-block">Cancelar</a>
+    </div>
+</form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>

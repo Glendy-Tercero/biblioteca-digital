@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca Digital</title>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body style="background-color: #fff7e2;">
+<div class="container">
+  <h1 class="text-center mt-5">Libros Disponibles</h1>
+
+  <ul class="list-group mt-3">
+    <th:block th:each="libro, iterStat : ${listaLibros}">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+
+        <div style="background-color: #ffffff;">
+          <strong th:text="${libro.titulo}"></strong>
+           (<span th:text="${libro.año}"></span>)
+           - Autor: <span th:text="${libro.autor}"></span>
+           | Género: <span th:text="${libro.genero}"></span>
+           | Unidades: <span th:text="${libro.cantidad}"></span>
+        </div>
+
+        <div style="background-color: #ffffff;" class="row g-3 needs-validation">
+        <form action="/biblioteca/editar" method="get" class="m-2">
+          <input type="hidden" name="indice" th:value="${iterStat.index}">
+          <button type="submit" class="btn btn-primary btn-sm">Editar</button>
+        </form>
+
+        <form action="/biblioteca/eliminar" method="post" class="m-2">
+          <input type="hidden" name="indice" th:value="${iterStat.index}">
+          <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+        </form>
+        </div>
+
+      </li>
+    </th:block>
+  </ul>
+
+
+  <h1 class="container mt-5">Nuevo Libro</h1>
+  <form action="/biblioteca/agregar" method="post" class="row g-3 needs-validation">
+
+    <div class="col-md-6 m-2">
+      <label for="titulo">Título del Libro</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título">
+    </div>
+
+    <div class="col-md-5 m-2">
+      <label for="autor">Autor del Libro</label>
+      <input type="text" class="form-control" id="autor" name="autor" placeholder="Autor">
+    </div>
+
+    <div class="col-md-3 m-2">
+      <label for="año">Año de Publicación</label>
+      <input type="number" class="form-control" id="año" name="año" placeholder="xxxx">
+    </div>
+
+    <div class="col-md-5 m-2">
+      <label for="genero">Género Literario</label>
+      <select class="form-control" id="genero" name="genero">
+        <option>Narrativo</option>
+        <option>Lírico</option>
+        <option>Dramático</option>
+        <option>Didáctico</option>
+        <option>Biográfico</option>
+        <option>Científico</option>
+        <option>Histórico</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 m-2">
+      <label for="cantidad">Cantidad Disponible</label>
+      <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
+    </div>
+
+    <div class="col-md-2 m-2">
+    <button type="submit" class="btn btn-success btn-block">Agregar Libro</button>
+    </div>
+
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
